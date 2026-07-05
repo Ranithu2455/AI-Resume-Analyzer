@@ -59,3 +59,32 @@ def upload():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+def analyze_resume(text):
+    text = text.lower()
+
+    sections = {
+        "skills": False,
+        "education": False,
+        "experience": False,
+        "projects": False
+    }
+
+    if "skills" in text:
+        sections["skills"] = True
+
+    if "education" in text:
+        sections["education"] = True
+
+    if "experience" in text:
+        sections["experience"] = True
+
+    if "project" in text or "projects" in text:
+        sections["projects"] = True
+
+    return sections
