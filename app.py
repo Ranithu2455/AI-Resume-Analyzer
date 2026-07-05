@@ -118,3 +118,14 @@ def analyze_resume(text):
         score += 25
 
     return score, sections
+
+def generate_feedback(sections):
+    feedback = []
+
+    for section, exists in sections.items():
+        if exists:
+            feedback.append(f"✓ {section.title()} section found")
+        else:
+            feedback.append(f"✗ {section.title()} section missing")
+
+    return feedback
