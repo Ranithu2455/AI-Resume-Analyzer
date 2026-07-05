@@ -38,61 +38,31 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-    file = request.files["resume"]
+    file = request.files.get("resume")
 
-    if file:
-        filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
-        file.save(filepath)
-if file.filename.endswith(".pdf"):
-    text = extract_pdf_text(filepath)
+    if not file or file.filename == "":
+        return "No file selected."
 
-elif file.filename.endswith(".docx"):
-    text = extract_docx_text(filepath)
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+    filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+    file.save(filepath)
 
-else:
-    return "Only PDF and DOCX files are supported."
+    if file.filename.lower().endswith(".pdf"):
+        text = extract_pdf_text(filepath)
+    elif file.filename.lower().endswith(".docx"):
+        text = extract_docx_text(filepath)
+    else:
+        return "Only PDF and DOCX files are supported."
 
-score, sections = analyze_resume(text)
+    score, sections = analyze_resume(text)
+    feedback = generate_feedback(sections)
 
-feedback = generate_feedback(sections)
+    result = f"Resume Score: {score}/100\n\n"
+    for item in feedback:
+        result += item + "\n"
 
-result = f"Resume Score: {score}/100\n\n"
+    return result
 
-for item in feedback:
-    result += item + "\n"
-
-return result
-
-      return "No file selected."
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
-def analyze_resume(text):
-    text = text.lower()
-
-    sections = {
-        "skills": False,
-        "education": False,
-        "experience": False,
-        "projects": False
-    }
-
-    if "skills" in text:
-        sections["skills"] = True
-
-    if "education" in text:
-        sections["education"] = True
-
-    if "experience" in text:
-        sections["experience"] = True
-
-    if "project" in text or "projects" in text:
-        sections["projects"] = True
-
-    return sections
 
 def analyze_resume(text):
     text = text.lower()
@@ -134,3 +104,6 @@ def generate_feedback(sections):
             feedback.append(f"✗ {section.title()} section missing")
 
     return feedback
+
+if __name__ == "__main__":
+    app.run(debug=True)
