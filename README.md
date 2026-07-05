@@ -1,17 +1,19 @@
 # AI Resume Analyzer
 
-A web-based resume analyzer built with Python and Flask.
+A Python Flask application that analyzes resumes and provides feedback.
 
 ## Features
-- Upload PDF resumes
-- Upload DOCX resumes
-- Extract text from resumes
-- Resume scoring (coming soon)
-- AI feedback (coming soon)
+
+- PDF Resume Upload
+- DOCX Resume Upload
+- Resume Section Detection
+- Resume Scoring
+- Feedback Generation
 
 ## Technologies
+
 - Python
 - Flask
 - PyPDF2
 - python-docx
-- Git & GitHub
+- GitHub
