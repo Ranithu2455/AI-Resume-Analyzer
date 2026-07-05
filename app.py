@@ -63,17 +63,11 @@ for item in feedback:
 
 return result
 
-        return "Only PDF and DOCX files are supported."
-
-    return "No file selected."
+      return "No file selected."
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
 
 
 def analyze_resume(text):
