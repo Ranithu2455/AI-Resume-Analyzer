@@ -43,14 +43,25 @@ def upload():
     if file:
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
         file.save(filepath)
+if file.filename.endswith(".pdf"):
+    text = extract_pdf_text(filepath)
 
-        if file.filename.endswith(".pdf"):
-            text = extract_pdf_text(filepath)
-            return text[:1000]
+elif file.filename.endswith(".docx"):
+    text = extract_docx_text(filepath)
 
-        elif file.filename.endswith(".docx"):
-            text = extract_docx_text(filepath)
-            return text[:1000]
+else:
+    return "Only PDF and DOCX files are supported."
+
+score, sections = analyze_resume(text)
+
+feedback = generate_feedback(sections)
+
+result = f"Resume Score: {score}/100\n\n"
+
+for item in feedback:
+    result += item + "\n"
+
+return result
 
         return "Only PDF and DOCX files are supported."
 
