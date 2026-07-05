@@ -88,3 +88,33 @@ def analyze_resume(text):
         sections["projects"] = True
 
     return sections
+
+def analyze_resume(text):
+    text = text.lower()
+
+    score = 0
+
+    sections = {
+        "skills": False,
+        "education": False,
+        "experience": False,
+        "projects": False
+    }
+
+    if "skills" in text:
+        sections["skills"] = True
+        score += 25
+
+    if "education" in text:
+        sections["education"] = True
+        score += 25
+
+    if "experience" in text:
+        sections["experience"] = True
+        score += 25
+
+    if "project" in text or "projects" in text:
+        sections["projects"] = True
+        score += 25
+
+    return score, sections
