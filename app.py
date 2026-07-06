@@ -57,12 +57,19 @@ def upload():
     score, sections = analyze_resume(text)
     feedback = generate_feedback(sections)
 
+    if score >= 80:
+        rating = "Excellent"
+    elif score >= 60:
+        rating = "Good"
+    else:
+        rating = "Needs Improvement"
 
-return render_template(
-    "result.html",
-    score=score,
-    feedback=feedback
-)
+    return render_template(
+        "result.html",
+        score=score,
+        rating=rating,
+        feedback=feedback
+    )
 
 
 
@@ -96,18 +103,36 @@ def analyze_resume(text):
 
     return score, sections
 
-feedback = generate_feedback(sections)
 
-if score >= 80:
-    rating = "Excellent"
-elif score >= 60:
-    rating = "Good"
-else:
-    rating = "Needs Improvement"
+def generate_feedback(sections):
+    feedback = []
 
-return render_template(
-    "result.html",
-    score=score,
-    rating=rating,
-    feedback=feedback
-)
+    if sections["skills"]:
+        feedback.append(" Skills section detected")
+
+    if sections["education"]:
+        feedback.append(" Education section detected")
+
+    if sections["experience"]:
+        feedback.append("Experience section detected")
+
+    if sections["projects"]:
+        feedback.append(" Projects section detected")
+
+    if not sections["skills"]:
+        feedback.append("Add a dedicated skills section.")
+
+    if not sections["education"]:
+        feedback.append("Include your education details.")
+
+    if not sections["experience"]:
+        feedback.append("Add work experience or internships.")
+
+    if not sections["projects"]:
+        feedback.append("Include relevant projects.")
+
+    return feedback
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
