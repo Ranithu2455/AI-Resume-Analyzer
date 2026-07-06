@@ -1,1 +1,18 @@
+<html>
+<head>
+    <title>Resume Analysis</title>
+</head>
+<body>
 
+    <h1>Resume Analysis Result</h1>
+
+    <h2>Score: {{ score }}/100</h2>
+
+    <ul>
+        {% for item in feedback %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
