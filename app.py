@@ -96,16 +96,18 @@ def analyze_resume(text):
 
     return score, sections
 
-def generate_feedback(sections):
-    feedback = []
+feedback = generate_feedback(sections)
 
-    for section, exists in sections.items():
-        if exists:
-            feedback.append(f"✓ {section.title()} section found")
-        else:
-            feedback.append(f"✗ {section.title()} section missing")
+if score >= 80:
+    rating = "Excellent"
+elif score >= 60:
+    rating = "Good"
+else:
+    rating = "Needs Improvement"
 
-    return feedback
-
-if __name__ == "__main__":
-    app.run(debug=True)
+return render_template(
+    "result.html",
+    score=score,
+    rating=rating,
+    feedback=feedback
+)
