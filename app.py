@@ -57,11 +57,13 @@ def upload():
     score, sections = analyze_resume(text)
     feedback = generate_feedback(sections)
 
-    result = f"Resume Score: {score}/100\n\n"
-    for item in feedback:
-        result += item + "\n"
 
-    return result
+return render_template(
+    "result.html",
+    score=score,
+    feedback=feedback
+)
+
 
 
 def analyze_resume(text):
