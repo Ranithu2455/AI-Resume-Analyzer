@@ -1,40 +1,98 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Resume Analysis</title>
-   <head>
-    <title>AI Resume Analyzer</title>
+    <title>Analysis Results</title>
 
     <style>
-    body{
-        font-family: Arial, sans-serif;
-        max-width: 700px;
-        margin: auto;
-        padding: 40px;
-    }
 
-    h1{
-        color: #333;
-    }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI,sans-serif;
+        }
 
-    button{
-        padding: 10px 20px;
-    }
+        body{
+            background:#0f172a;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .card{
+            width:700px;
+            background:white;
+            border-radius:20px;
+            padding:40px;
+            box-shadow:0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            margin-bottom:20px;
+        }
+
+        .score{
+            font-size:50px;
+            font-weight:bold;
+            color:#2563eb;
+        }
+
+        .rating{
+            font-size:24px;
+            margin-bottom:25px;
+        }
+
+        ul{
+            margin-top:20px;
+        }
+
+        li{
+            padding:12px;
+            margin-bottom:10px;
+            background:#f1f5f9;
+            border-radius:10px;
+            list-style:none;
+        }
+
+        a{
+            display:inline-block;
+            margin-top:25px;
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+            padding:12px 20px;
+            border-radius:10px;
+        }
+
     </style>
 
 </head>
-</head>
 <body>
 
-    <h1>Resume Analysis Result</h1>
+<div class="card">
 
-    <h2>Score: {{ score }}/100</h2>
-    <h3>Rating: {{ rating }}</h3>
+    <h1>Resume Analysis Report</h1>
+
+    <div class="score">
+        {{ score }}/100
+    </div>
+
+    <div class="rating">
+        Rating: <strong>{{ rating }}</strong>
+    </div>
+
+    <h3>Recommendations</h3>
 
     <ul>
         {% for item in feedback %}
         <li>{{ item }}</li>
         {% endfor %}
     </ul>
+
+    <a href="/">Analyze Another Resume</a>
+
+</div>
 
 </body>
 </html>
