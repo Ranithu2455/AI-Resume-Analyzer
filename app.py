@@ -163,3 +163,12 @@ def generate_feedback(sections):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+def get_resume_statistics(text, skills):
+
+    word_count = len(text.split())
+
+    return {
+        "word_count": word_count,
+        "skills_count": len(skills)
+    }
