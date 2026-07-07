@@ -91,6 +91,17 @@ def upload():
 
 def analyze_resume(text):
     text = text.lower()
+    def extract_skills(text):
+
+    detected_skills = []
+
+    text = text.lower()
+
+    for skill in TECH_SKILLS:
+        if skill in text:
+            detected_skills.append(skill.title())
+
+    return detected_skills
 
     score = 0
 
