@@ -7,6 +7,22 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+TECH_SKILLS = [
+    "python",
+    "java",
+    "javascript",
+    "html",
+    "css",
+    "sql",
+    "mysql",
+    "flask",
+    "django",
+    "react",
+    "git",
+    "github",
+    "c++",
+    "c#"
+]
 
 
 def extract_pdf_text(path):
