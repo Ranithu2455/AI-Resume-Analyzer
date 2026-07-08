@@ -70,15 +70,22 @@ def upload():
     else:
         return "Only PDF and DOCX files are supported."
 
-    score, sections = analyze_resume(text)
-    feedback = generate_feedback(sections)
+score, sections = analyze_resume(text)
+feedback = generate_feedback(sections)
 
-    if score >= 80:
-        rating = "Excellent"
-    elif score >= 60:
-        rating = "Good"
-    else:
-        rating = "Needs Improvement"
+skills = extract_skills(text)
+
+stats = get_resume_statistics(
+    text,
+    skills
+)
+
+if score >= 80:
+    rating = "Excellent"
+elif score >= 60:
+    rating = "Good"
+else:
+    rating = "Needs Improvement"
 
     return render_template(
         "result.html",
