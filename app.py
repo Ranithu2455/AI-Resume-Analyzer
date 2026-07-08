@@ -87,13 +87,14 @@ elif score >= 60:
 else:
     rating = "Needs Improvement"
 
-    return render_template(
-        "result.html",
-        score=score,
-        rating=rating,
-        feedback=feedback
-    )
-
+return render_template(
+    "result.html",
+    score=score,
+    rating=rating,
+    feedback=feedback,
+    skills=skills,
+    stats=stats
+)
 
 
 def analyze_resume(text):
