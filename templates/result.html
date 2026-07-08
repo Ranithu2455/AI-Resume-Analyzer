@@ -81,6 +81,18 @@
     <div class="rating">
         Rating: <strong>{{ rating }}</strong>
     </div>
+    <h2>Detected Skills</h2>
+
+<ul>
+{% for skill in skills %}
+<li>{{ skill }}</li>
+{% endfor %}
+</ul>
+
+<h2>Resume Statistics</h2>
+
+<p>Words: {{ stats.word_count }}</p>
+<p>Skills Found: {{ stats.skills_count }}</p>
 
     <h3>Recommendations</h3>
 
